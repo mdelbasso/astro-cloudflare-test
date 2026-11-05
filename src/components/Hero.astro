@@ -1,0 +1,52 @@
+---
+import { ui, linkedin, type Lang } from '../i18n/ui';
+import Button from './Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].hero;
+---
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker fade" set:html={t.kicker} />
+    <div class="masthead">
+      <h1 class="headline">
+        <span class="r-line"><span set:html={t.headline[0]} /></span>
+        <span class="r-line"><span set:html={t.headline[1]} /></span>
+        <span class="r-line"><span class="soft" set:html={t.headline[2]} /></span>
+      </h1>
+      <div class="spec fade">
+        {t.spec.map((s, i) => (
+          <div class="spec-row">
+            <span class="k">{s.k}</span>
+            <span class="v">{i === 0 && <><span class="g">●</span>{' '}</>}{s.v}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p class="hero-lead fade"><span>{t.lead}</span><sup class="fn"><a href="#notas">1</a></sup>.</p>
+    <p class="hero-tagline fade mono">{t.tagline}</p>
+
+    <div class="hero-actions fade">
+      <Button href="#work" variant="solid">{t.ctaWork}</Button>
+      <Button href={linkedin} variant="ghost" external>{t.ctaContact}</Button>
+    </div>
+
+    <div class="hero-rule draw"></div>
+  </div>
+</header>
+
+<style is:global>
+  .hero{padding:clamp(128px,15vw,172px) 0 0;}
+  .masthead{display:grid;grid-template-columns:1fr;gap:40px;}
+  @media(min-width:960px){.masthead{grid-template-columns:1fr 300px;gap:56px;align-items:end;}}
+  .spec{border-top:2px solid var(--ink);padding-top:18px;display:flex;flex-direction:column;gap:16px;}
+  .spec-row{display:flex;flex-direction:column;gap:3px;}
+  .spec-row .k{font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-lbl);}
+  .spec-row .v{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.02em;}
+  .spec-row .v .g{color:var(--good);}
+  .hero-lead{margin-top:58px;max-width:62ch;font-size:clamp(19px,2.1vw,23px);line-height:1.5;}
+  .hero-lead .em{font-style:italic;color:var(--accent-deep);}
+  .hero-tagline{margin-top:16px;font-size:var(--fs-xs);letter-spacing:0.03em;color:var(--ink-lbl);}
+</style>

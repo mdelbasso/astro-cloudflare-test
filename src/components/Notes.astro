@@ -1,0 +1,26 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].notes;
+---
+<!-- FOOTNOTES -->
+<section class="notes" id="notas">
+  <div class="wrap">
+    <p class="t">{t.t}</p>
+    <ol>
+      {t.items.map((n) => <li>{n}</li>)}
+    </ol>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ FOOTNOTES ============ */
+  .notes{padding:72px 0 72px;}
+  .notes > .wrap{border-top:1px solid var(--ink-15);padding-top:44px;}
+  .notes .t{font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-lbl);margin-bottom:24px;}
+  .notes ol{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:62ch;counter-reset:fn;}
+  .notes li{counter-increment:fn;font-size:var(--fs-sm);line-height:1.6;color:var(--ink-70);display:flex;gap:14px;}
+  .notes li::before{content:counter(fn);font-family:var(--mono);font-size:var(--fs-xs);color:var(--accent);font-weight:700;flex-shrink:0;padding-top:2px;}
+</style>

@@ -1,0 +1,9 @@
+---
+import CurvedArrow from './icons/CurvedArrow.astro';
+interface Props { text: string; }
+const { text } = Astro.props;
+---
+<div class="deck-note fade">
+  <CurvedArrow />
+  <p>{text}</p>
+</div>

@@ -1,0 +1,30 @@
+---
+import { ui, linkedin, type Lang } from '../i18n/ui';
+import Button from './Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].cta;
+---
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="wrap cta-in">
+    <h2><span>{t.h1}</span><br><span class="soft">{t.h2}</span></h2>
+    <div class="cta-side fade">
+      <p>{t.desc}</p>
+      <Button href={linkedin} external>{t.link}</Button>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ CTA ============ */
+  .cta{background:var(--ink);color:var(--bg);padding:120px 0;}
+  .cta-in{display:grid;grid-template-columns:1fr;gap:40px;}
+  @media(min-width:900px){.cta-in{grid-template-columns:1.3fr 1fr;align-items:end;}}
+  .cta h2{font-family:var(--disp);font-weight:900;font-size:clamp(38px,6.4vw,90px);letter-spacing:-0.035em;line-height:0.92;color:var(--bg);}
+  .cta h2 .soft{font-family:var(--serif);font-weight:400;font-style:italic;color:rgba(238,243,245,0.55);letter-spacing:0;}
+  .cta-side p{font-size:var(--fs-base);color:rgba(238,243,245,0.7);margin-bottom:26px;max-width:38ch;}
+  .cta .btn{border-color:rgba(238,243,245,0.4);color:var(--bg);}
+  @media (hover:hover) and (pointer:fine){ .cta .btn:hover{background:var(--accent);border-color:var(--accent);} }
+</style>

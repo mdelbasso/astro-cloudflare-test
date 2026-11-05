@@ -1,0 +1,36 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].results;
+---
+<!-- RESULTS LEDGER -->
+<section class="results" id="results">
+  <div class="wrap">
+    <div class="results-head fade">
+      <h2>{t.h}</h2>
+      <div class="note">{t.note}</div>
+    </div>
+    <div class="results-grid stag">
+      {t.stats.map((s) => (
+        <div class="rstat"><div class="big" data-count={s.count} data-suffix={s.suffix}>0</div><div class="cap">{s.cap}</div></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ RESULTS — 3-col grid, naranja sobre azul profundo ============ */
+  .results{background:var(--ink);color:var(--bg);}
+  .results .wrap{padding-top:52px;padding-bottom:52px;}
+  .results-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:28px;}
+  .results-head h2{font-size:clamp(20px,2.4vw,28px);letter-spacing:-0.02em;color:var(--bg);}
+  .results-head .note{font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.08em;text-transform:uppercase;color:rgba(238,243,245,0.72);}
+  .results-grid{display:grid;grid-template-columns:1fr;gap:26px;border-top:1px solid rgba(238,243,245,0.2);padding-top:28px;}
+  @media(min-width:700px){.results-grid{grid-template-columns:repeat(3,1fr);}}
+  .rstat{padding:0;}
+  @media(min-width:700px){.rstat{padding:0 32px;border-left:1px solid rgba(238,243,245,0.2);}.rstat:first-child{border-left:none;padding-left:0;}}
+  .rstat .big{font-family:var(--disp);font-weight:900;font-size:clamp(32px,4vw,44px);letter-spacing:-0.02em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .rstat .cap{margin-top:8px;font-family:var(--serif);font-size:var(--fs-sm);line-height:1.45;color:rgba(238,243,245,0.72);max-width:26ch;}
+</style>

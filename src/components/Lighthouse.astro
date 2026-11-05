@@ -1,0 +1,54 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import CurvedArrow from './icons/CurvedArrow.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].audit;
+const gauges = [
+  { score: 99, label: 'Performance' },
+  { score: 100, label: t.accessibility },
+  { score: 100, label: 'Best Practices' },
+  { score: 100, label: 'SEO' },
+];
+---
+<!-- LIGHTHOUSE READOUT -->
+<section class="audit">
+  <div class="wrap">
+    <div class="audit-head fade">
+      <div class="t" set:html={t.title} />
+    </div>
+    <div class="audit-body">
+      <div class="gauges stag" id="gauges">
+        {gauges.map((g) => (
+          <div class="gauge" data-score={g.score}><div class="gauge-svg"><svg aria-hidden="true" viewBox="0 0 118 118"><circle class="gauge-track" cx="59" cy="59" r="52"></circle><circle class="gauge-arc" cx="59" cy="59" r="52"></circle></svg><div class="gauge-num">0</div></div><div class="gauge-lbl">{g.label}</div></div>
+        ))}
+      </div>
+      <div class="arrow-note fade">
+        <CurvedArrow />
+        <span set:html={t.note} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ LIGHTHOUSE READOUT ============ */
+  .audit{padding:72px 0 96px;}
+  .audit-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:42px;}
+  .audit-head .t{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.03em;text-transform:uppercase;}
+  .audit-head .t b{color:var(--accent);}
+  .audit-head .s{font-family:var(--serif);font-style:italic;font-size:var(--fs-sm);color:var(--ink-70);}
+  .audit-body{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;}
+  @media(min-width:1000px){.audit-body{grid-template-columns:1fr 230px;gap:44px;}}
+  .audit-body .arrow-note{margin-top:0;}
+  .gauges{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 20px;}
+  @media(min-width:760px){.gauges{grid-template-columns:repeat(4,1fr);}}
+  .gauge{display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .gauge-svg{width:118px;height:118px;position:relative;}
+  .gauge-svg svg{transform:rotate(-90deg);}
+  .gauge-track{fill:none;stroke:var(--ink-08);stroke-width:6;}
+  .gauge-arc{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.3s var(--out);}
+  .gauge-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:34px;letter-spacing:-0.02em;}
+  .gauge-lbl{font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-70);text-align:center;}
+</style>

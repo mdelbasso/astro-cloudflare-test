@@ -1,0 +1,102 @@
+/* Estilos globales — variables (:root), base, utilidades y reveals. Tomados tal cual del original. */
+  :root{
+    /* paleta de marca oficial — azul profundo / gris carbón / naranja energía / fondo claro */
+    --bg:#F6F9FA;             /* fondo claro — aclarado ~50% respecto de la versión anterior (#EEF3F5) */
+    --bg-2:#F1F4F6;           /* antes #E3EAED, mismo criterio de aclarado */
+    --ink:#1E474F;            /* azul profundo — secciones oscuras, encabezados, líneas estructurales */
+    --slate:#3A393E;          /* gris carbón — texto de lectura, bordes, neutros */
+    --ink-70:rgba(58,57,62,0.72);
+    --ink-lbl:rgba(58,57,62,0.75); /* antes 0.48 = 2.53:1 de contraste, fallaba WCAG AA. Ahora ~5:1 */
+    --ink-15:rgba(58,57,62,0.16);
+    --ink-08:rgba(58,57,62,0.08);
+    --accent:#E3670A;         /* naranja energía */
+    --accent-deep:#B85708;
+    --good:#1F7A46;
+    --avg:#C9691A;
+    --poor:#C02A18;
+    --disp:'Archivo',sans-serif;
+    --serif:'Newsreader',serif;
+    --mono:'Space Mono',monospace;
+    /* curva fuerte — la built-in es demasiado débil */
+    --out:cubic-bezier(0.23,1,0.32,1);
+    --container:1280px;
+    /* escala tipográfica de CONTENIDO (no títulos) — antes había ~18 tamaños casi-iguales (10.5–17px)
+       compitiendo entre sí; se consolida a 5 pasos deliberados para bajar el ruido visual */
+    --fs-2xs:11px;                        /* mono — micro-etiquetas, meta, eyebrows */
+    --fs-xs:12px;                         /* mono — UI funcional: botones, nav, links */
+    --fs-sm:15px;                         /* serif — anotaciones/asides/captions compactos */
+    --fs-base:16px;                       /* serif — párrafo de lectura estándar */
+    --fs-md:clamp(17px,1.6vw,19px);       /* serif itálica — línea destacada dentro de una sección */
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--bg);color:var(--slate);font-family:var(--serif);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,4vw,52px);}
+  ::selection{background:var(--accent);color:var(--bg);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  h1,h2,h3,h4{font-family:var(--disp);font-weight:800;letter-spacing:-0.02em;line-height:1;text-wrap:balance;color:var(--ink);}
+  p{text-wrap:pretty;}
+  .mono{font-family:var(--mono);}
+  .arrow-note{display:flex;align-items:flex-start;gap:10px;margin-top:22px;max-width:32ch;}
+  .arrow-note svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;transform:rotate(-6deg);margin-top:3px;}
+  .arrow-note span{font-family:var(--serif);font-style:italic;font-size:var(--fs-sm);line-height:1.5;color:var(--ink-70);}
+  .arrow-note a{color:var(--accent-deep);text-decoration:underline;text-underline-offset:2px;}
+
+  /* ---- reveal: contenido visible por defecto; JS opta por animar (nunca secciones en blanco) ---- */
+  .r-line{display:block;overflow:hidden;}
+  .js .fade{opacity:0;transform:translateY(14px);transition:opacity .7s var(--out),transform .7s var(--out);}
+  .js .fade.in{opacity:1;transform:translateY(0);}
+  .js .r-line > *{display:block;transform:translateY(103%);transition:transform .9s var(--out);}
+  .js .r-line.in > *{transform:translateY(0);}
+  .js .stag > *{opacity:0;transform:translateY(12px);transition:opacity .6s var(--out),transform .6s var(--out);}
+  .js .stag.in > *{opacity:1;transform:translateY(0);}
+  .js .stag.in > *:nth-child(1){transition-delay:.02s}.js .stag.in > *:nth-child(2){transition-delay:.07s}
+  .js .stag.in > *:nth-child(3){transition-delay:.12s}.js .stag.in > *:nth-child(4){transition-delay:.17s}
+  .js .stag.in > *:nth-child(5){transition-delay:.22s}.js .stag.in > *:nth-child(6){transition-delay:.27s}
+  .js .draw{transform:scaleX(0);transform-origin:left;transition:transform .9s var(--out);}
+  .js .draw.in{transform:scaleX(1);}
+
+  /* el contenido del hero (above-the-fold en la primera carga) no espera al reveal JS+IntersectionObserver:
+     ese patrón deja el candidato a LCP (titular/kicker/CTA) sin pintar hasta que el scroll-observer dispara
+     la clase "in" y termina la transición — en mobile con CPU/red throttled eso empuja FCP/LCP. El resto de
+     la página (todo lo que se revela al hacer scroll) no se toca: mismo look, misma animación, sin cambios. */
+  .hero .fade,.hero .r-line>*,.hero .draw{opacity:1;transform:none;transition:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .js .fade,.js .stag > *,.js .r-line > *{transform:none;transition:opacity .25s ease;}
+    .js .draw{transform:none;transition:opacity .25s ease;opacity:0;}
+    .js .draw.in{opacity:1;}
+    .avail .dot{animation:none;}
+  }
+
+  /* hero: piezas compartidas entre portada y 404 */
+  .kicker{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.04em;color:var(--ink-70);margin-bottom:44px;}
+  .kicker b{color:var(--accent-deep);font-weight:700;} /* mismo fix de contraste que .lang a.on */
+  .headline{font-family:var(--disp);font-weight:900;font-size:clamp(42px,7vw,94px);letter-spacing:-0.03em;line-height:0.94;}
+  .headline .soft{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-0.005em;color:var(--ink-70);font-size:0.6em;line-height:1.15;}
+  .headline .mark{color:var(--accent);}
+  .hero-actions{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;}
+  .hero-rule{margin-top:84px;height:2px;background:var(--ink);}
+
+  /* footnote marks */
+  sup.fn{font-family:var(--mono);font-style:normal;font-size:0.55em;color:var(--accent);font-weight:700;margin-left:2px;}
+  sup.fn a{border:none;}
+
+  /* ============ SECTION HEADS — cadencia de documento, no eyebrow scaffold ============ */
+  .sec > .wrap{border-top:1px solid var(--ink-15);}
+  .sec-head{display:grid;grid-template-columns:1fr;gap:16px;padding:88px 0 52px;}
+  @media(min-width:880px){.sec-head{grid-template-columns:1.3fr 1fr;gap:48px;align-items:end;}}
+  .sec-head h2{font-size:clamp(30px,4.2vw,52px);letter-spacing:-0.025em;}
+  .sec-head .deck{font-family:var(--serif);font-style:italic;font-size:var(--fs-md);color:var(--ink-70);line-height:1.5;max-width:44ch;}
+  @media(min-width:880px){.sec-head .deck{text-align:right;justify-self:end;}}
+  .sec-head .deck-note{display:flex;align-items:flex-start;gap:10px;max-width:38ch;}
+  @media(min-width:880px){.sec-head .deck-note{justify-self:end;}}
+  .sec-head .deck-note svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;transform:rotate(-6deg);margin-top:3px;}
+  .sec-head .deck-note p{font-family:var(--serif);font-style:italic;font-size:var(--fs-sm);color:var(--ink-70);line-height:1.5;}
+  .doc-tag{font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.05em;color:var(--ink-lbl);padding:20px 0 0;}
+  .doc-tag b{color:var(--ink);font-weight:700;}

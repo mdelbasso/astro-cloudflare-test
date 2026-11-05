@@ -1,0 +1,24 @@
+---
+import { ui, base, type Lang } from '../i18n/ui';
+import Button from './Button.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].e404;
+---
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker"><b>404</b></p>
+    <h1 class="headline">{t.h1a}<br><span class="soft">{t.h1b}</span></h1>
+    <p class="hero-lead">{t.lead}</p>
+    <div class="hero-actions">
+      <Button href={base[lang]} variant="solid">{t.cta}</Button>
+    </div>
+    <div class="hero-rule"></div>
+  </div>
+</header>
+
+<style is:global>
+  .hero{padding:clamp(128px,15vw,172px) 0 clamp(96px,12vw,140px);}
+  .hero-lead{margin-top:32px;max-width:62ch;font-size:clamp(19px,2.1vw,23px);line-height:1.5;color:var(--ink-70);}
+</style>
