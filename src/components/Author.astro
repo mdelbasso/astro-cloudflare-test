@@ -1,0 +1,49 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].author;
+---
+<!-- AUTHOR NOTE -->
+<section class="sec author">
+  <div class="wrap">
+    <div class="sec-head" style="padding-bottom:36px;">
+      <h2>{t.h}</h2>
+    </div>
+    <div class="pullquote fade">
+      {/* La foto no está en el repo: colocar maia-del-basso-photo.webp en public/ */}
+      <div class="pq-photo"><img src="/maia-del-basso-photo.webp" alt="Maia Del Basso" width="150" height="150" loading="lazy" decoding="async"></div>
+      <div class="pq-body">
+        <p class="pq-quote">{t.quote}</p>
+        <div class="author-in" style="margin-top:22px;">
+          <p>{t.p1}</p>
+          <p>{t.p2}</p>
+        </div>
+        <div class="pq-attr" style="margin-top:22px;"><span>{t.name}</span> · <span>{t.role}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .pullquote{margin-top:64px;display:grid;grid-template-columns:1fr;gap:28px;align-items:center;}
+  @media(min-width:760px){.pullquote{grid-template-columns:150px 1fr;gap:44px;}}
+  .pq-photo{width:150px;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:var(--bg-2);border:1px solid var(--ink-15);box-shadow:0 10px 28px -12px rgba(30,71,79,0.35);margin:0 auto;}
+  @media(min-width:760px){.pq-photo{margin:0;}}
+  .pq-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  @media (hover:hover) and (pointer:fine){
+    .pq-photo img{filter:grayscale(85%);transition:filter .45s var(--out),transform .45s var(--out);}
+    .pq-photo:hover img{filter:grayscale(0%);transform:scale(1.04);}
+  }
+  @media (prefers-reduced-motion: reduce){ .pq-photo img{transition:none;} }
+  .pq-body .pq-quote{font-family:var(--serif);font-style:italic;font-size:var(--fs-md);line-height:1.5;color:var(--ink);max-width:52ch;}
+  .pq-attr{margin-top:20px;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.03em;color:var(--ink-70);}
+
+  /* ============ AUTHOR NOTE ============ */
+  .author{padding-bottom:96px;}
+  .author-in{max-width:66ch;}
+  .author-in p{font-size:var(--fs-base);line-height:1.55;}
+  .author-in p + p{margin-top:1em;}
+  .author-in .sig{margin-top:28px;font-family:var(--serif);font-style:italic;font-size:var(--fs-base);color:var(--ink-70);}
+</style>

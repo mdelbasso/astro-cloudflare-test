@@ -1,0 +1,34 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].no;
+---
+<!-- NO-LIST -->
+<section class="nolist">
+  <div class="wrap">
+    <div class="nolist-grid">
+      <h2 class="fade"><span class="soft">{t.h1}</span> <span class="hi">{t.h2}</span></h2>
+      <ul class="stag">
+        {t.items.map((i) => <li><span class="x">✗</span><span set:html={i} /></li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ NO-LIST (manifesto) ============ */
+  .nolist{border-top:1px solid var(--ink-15);}
+  .nolist .wrap{padding-top:72px;padding-bottom:72px;}
+  .nolist-grid{display:grid;grid-template-columns:1fr;gap:36px;}
+  @media(min-width:880px){.nolist-grid{grid-template-columns:1fr 1.4fr;gap:64px;align-items:center;}}
+  .nolist h2{font-size:clamp(28px,3.8vw,46px);letter-spacing:-0.025em;}
+  .nolist h2 .soft{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--ink);letter-spacing:0;}
+  .nolist h2 .hi{color:var(--accent);}
+  .nolist li s{color:var(--ink-lbl);text-decoration-color:var(--accent);}
+  .nolist ul{display:flex;flex-direction:column;}
+  .nolist li{display:flex;gap:18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--ink-15);font-family:var(--serif);font-size:var(--fs-md);line-height:1.45;}
+  .nolist li:first-child{border-top:1px solid var(--ink-15);}
+  .nolist li .x{font-family:var(--mono);font-weight:700;color:var(--accent);flex-shrink:0;font-size:0.85em;}
+</style>

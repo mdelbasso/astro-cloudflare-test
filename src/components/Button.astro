@@ -1,0 +1,26 @@
+---
+import ArrowUpRight from './icons/ArrowUpRight.astro';
+
+interface Props {
+  href: string;
+  /** solid | ghost | (vacío = botón base) */
+  variant?: 'solid' | 'ghost';
+  /** abre en pestaña nueva con rel="noopener" */
+  external?: boolean;
+}
+const { href, variant, external = false } = Astro.props;
+const cls = ['btn', variant && `btn--${variant}`].filter(Boolean).join(' ');
+---
+<a href={href} class={cls} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}><span><slot /></span> <ArrowUpRight /></a>
+
+<style is:global>
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.05em;text-transform:uppercase;padding:14px 22px;border:1px solid var(--ink);cursor:pointer;background:transparent;color:var(--ink);transition:background .18s ease,color .18s ease,border-color .18s ease,transform .12s var(--out);}
+  .btn:active{transform:scale(0.98);}
+  .btn svg{width:13px;height:13px;transition:transform .18s var(--out);}
+  .btn--solid{background:var(--ink);color:var(--bg);}
+  @media (hover:hover) and (pointer:fine){
+    .btn--solid:hover{background:var(--accent);border-color:var(--accent);}
+    .btn--ghost:hover{background:var(--ink);color:var(--bg);}
+    .btn:hover svg{transform:translate(3px,-3px);}
+  }
+</style>

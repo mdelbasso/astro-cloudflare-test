@@ -1,0 +1,18 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero404 from './Hero404.astro';
+import Footer from './Footer.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].e404;
+---
+<Base lang={lang} title={t.title} description={t.description} path="404" noindex>
+  <Header lang={lang} page="404" />
+  <main id="main">
+    <Hero404 lang={lang} />
+  </main>
+  <Footer lang={lang} page="404" />
+</Base>

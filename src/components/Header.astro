@@ -1,0 +1,93 @@
+---
+import { ui, base, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** home: anclas locales (#capabilities) · 404: anclas hacia la portada del idioma */
+  page: 'home' | '404';
+}
+const { lang, page } = Astro.props;
+const t = ui[lang];
+const prefix = page === 'home' ? '' : base[lang];
+const brandHref = page === 'home' ? '#' : base[lang];
+const linkedin = 'https://www.linkedin.com/in/mdelbasso/';
+const links = [
+  { href: `${prefix}#capabilities`, label: t.nav.services },
+  { href: `${prefix}#results`, label: t.nav.results },
+  { href: `${prefix}#work`, label: t.nav.work },
+  { href: `${prefix}#stack`, label: t.nav.stack },
+];
+---
+<a href="#main" class="skip-link">{t.skip}</a>
+
+<div class="docbar" id="docbar">
+  <div class="wrap docbar-in">
+    <a href={brandHref} class="brand">
+      <svg aria-hidden="true" viewBox="0 0 26 26" fill="none"><path d="M3 20L10 6L13.5 13L17 6L23 20" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="10" cy="6" r="1.5" fill="var(--accent)"></circle></svg>
+      PeakCore
+    </a>
+    <nav class="docbar-mid">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href={linkedin} target="_blank" rel="noopener">{t.nav.contact}</a>
+    </nav>
+    <div class="docbar-right">
+      <div class="avail"><span class="dot"></span><span>{t.nav.status}</span></div>
+      <div class="lang" role="group" aria-label="Language / Idioma">
+        <a href="/en/" data-lang="en" class={lang === 'en' ? 'on' : undefined} aria-current={lang === 'en' ? 'page' : undefined}>EN</a><span>/</span><a href="/" data-lang="es" class={lang === 'es' ? 'on' : undefined} aria-current={lang === 'es' ? 'page' : undefined}>ES</a>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label={t.nav.menu}>
+        <svg aria-hidden="true" class="i-open" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        <svg aria-hidden="true" class="i-close" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="wrap">
+    <nav>
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href={linkedin} target="_blank" rel="noopener">{t.nav.contact}</a>
+    </nav>
+  </div>
+</div>
+
+<style is:global>
+  /* ============ DOC BAR ============ */
+  .docbar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--ink-15);transition:transform .35s var(--out);}
+  .docbar.hide{transform:translateY(-100%);}
+  .docbar-in{display:flex;align-items:center;justify-content:space-between;height:52px;gap:24px;font-family:var(--mono);font-size:var(--fs-xs);}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:800;letter-spacing:-0.01em;font-size:15px;color:var(--ink);}
+  .brand svg{width:22px;height:22px;}
+  .docbar-mid{display:none;color:var(--ink-lbl);letter-spacing:0.04em;}
+  @media(min-width:1040px){.docbar-mid{display:flex;gap:26px;}}
+  .docbar-mid a{transition:color .18s ease;}
+  @media (hover:hover) and (pointer:fine){ .docbar-mid a:hover{color:var(--accent);} }
+  .docbar-right{display:flex;align-items:center;gap:18px;}
+  .lang{display:flex;align-items:center;gap:6px;}
+  .lang a{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-lbl);cursor:pointer;padding:2px;transition:color .18s ease;}
+  .lang a.on{color:var(--accent-deep);font-weight:700;} /* accent (#E3670A) vs bg = 3.2:1, falla WCAG AA en texto chico; accent-deep = 4.5:1, mismo token ya usado en otros textos de la página */
+  .lang span{color:var(--ink-15);}
+  .avail{display:none;align-items:center;gap:7px;color:var(--ink-70);letter-spacing:0.04em;}
+  @media(min-width:720px){.avail{display:flex;}}
+  .avail .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,122,70,0.45)}70%{box-shadow:0 0 0 6px rgba(31,122,70,0)}100%{box-shadow:0 0 0 0 rgba(31,122,70,0)}}
+
+  /* ---- skip link ---- */
+  .skip-link{position:absolute;top:-48px;left:12px;z-index:200;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:var(--fs-xs);padding:12px 18px;transition:top .18s var(--out);}
+  .skip-link:focus{top:12px;}
+
+  /* ---- mobile menu (hamburger) — cubre el hueco de nav < 1040px ---- */
+  .hamburger{display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:none;border:1px solid var(--ink-15);cursor:pointer;flex-shrink:0;}
+  @media(min-width:1040px){.hamburger{display:none;}}
+  .hamburger svg{width:16px;height:16px;color:var(--ink);}
+  .hamburger .i-close{display:none;}
+  .hamburger[aria-expanded="true"] .i-open{display:none;}
+  .hamburger[aria-expanded="true"] .i-close{display:block;}
+  .mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;bottom:0;z-index:99;background:var(--bg);overflow-y:auto;}
+  .mobile-menu.open{display:block;}
+  @media(min-width:1040px){.mobile-menu{display:none !important;}}
+  .mobile-menu nav{display:flex;flex-direction:column;padding:8px 0;}
+  .mobile-menu a{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:var(--ink);padding:18px 0;border-bottom:1px solid var(--ink-15);}
+  .mobile-menu .wrap{padding-top:12px;}
+</style>

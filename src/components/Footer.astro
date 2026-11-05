@@ -1,0 +1,50 @@
+---
+import { ui, base, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  page: 'home' | '404';
+}
+const { lang, page } = Astro.props;
+const t = ui[lang];
+const c = t.col;
+const home = page === 'home';
+---
+<!-- COLOPHON -->
+<footer class="colophon">
+  <div class="wrap">
+    <div class:list={['colophon-grid', home && 'stag']}>
+      <div>
+        <p class="ct">{c.t1}</p>
+        <p>{c.p1}</p>
+      </div>
+      <div>
+        <p class="ct">{c.t2}</p>
+        <p>{c.p2}</p>
+      </div>
+      <div>
+        <p class="ct">{c.t3}</p>
+        {/* El script de peso (scripts/weight.ts) lee los textos desde estos data-attributes */}
+        <p id="liveWeight" data-weight={c.weight} data-reqs={c.reqs} data-load={c.load}><span>{c.measuring}</span></p>
+      </div>
+    </div>
+    <div class:list={['colophon-base', home && 'fade']}>
+      <div>{home ? c.copyright : t.e404.copyright}</div>
+      <a href={home ? '#' : base[lang]} class="top"><span>{home ? c.back : t.e404.cta}</span> <svg aria-hidden="true" viewBox="0 0 14 14" fill="none">{home ? <path d="M7 11V3M7 3L3 7M7 3L11 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path> : <path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>}</svg></a>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  /* ============ COLOPHON — la página se pesa a sí misma ============ */
+  .colophon{background:var(--ink);color:rgba(238,243,245,0.68);padding:44px 0 52px;}
+  .colophon > .wrap{border-top:1px solid rgba(238,243,245,0.16);padding-top:36px;}
+  .colophon-grid{display:grid;grid-template-columns:1fr;gap:28px;font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.03em;line-height:1.8;}
+  @media(min-width:820px){.colophon-grid{grid-template-columns:1fr 1fr 1fr;gap:40px;}}
+  .colophon .ct{color:var(--bg);font-weight:700;text-transform:uppercase;font-size:var(--fs-2xs);letter-spacing:0.1em;margin-bottom:8px;}
+  .colophon .live{color:#EEA46C;font-weight:700;}
+  .colophon-base{margin-top:36px;padding-top:20px;border-top:1px solid rgba(238,243,245,0.12);display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:var(--fs-2xs);}
+  @media(min-width:720px){.colophon-base{flex-direction:row;justify-content:space-between;}}
+  .colophon a.top{display:inline-flex;align-items:center;gap:7px;color:var(--bg);}
+  .colophon a.top svg{width:12px;height:12px;}
+</style>

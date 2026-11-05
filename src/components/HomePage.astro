@@ -1,0 +1,38 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Lighthouse from './Lighthouse.astro';
+import Capabilities from './Capabilities.astro';
+import Results from './Results.astro';
+import Projects from './Projects.astro';
+import NotDoing from './NotDoing.astro';
+import Stack from './Stack.astro';
+import Process from './Process.astro';
+import Author from './Author.astro';
+import Notes from './Notes.astro';
+import Cta from './Cta.astro';
+import Footer from './Footer.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+<Base lang={lang} title={t.meta.title} description={t.meta.description} path="">
+  <Header lang={lang} page="home" />
+  <Hero lang={lang} />
+  <main id="main">
+    <Lighthouse lang={lang} />
+    <Capabilities lang={lang} />
+    <Results lang={lang} />
+    <Projects lang={lang} />
+    <NotDoing lang={lang} />
+    <Stack lang={lang} />
+    <Process lang={lang} />
+    <Author lang={lang} />
+    <Notes lang={lang} />
+    <Cta lang={lang} />
+  </main>
+  <Footer lang={lang} page="home" />
+</Base>

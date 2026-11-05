@@ -1,0 +1,40 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import Chips from './Chips.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].cap;
+---
+<!-- CAPABILITIES -->
+<section class="sec" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 set:html={t.title} />
+      <p class="deck fade">{t.deck}</p>
+    </div>
+    <div class="cap stag">
+      {t.items.map((c) => (
+        <div class="cap-row">
+          <h3>{c.h}</h3>
+          <div><p>{c.p}</p><Chips items={c.chips} /></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ CAPABILITIES ============ */
+  .cap{border-bottom:1px solid var(--ink-15);margin-bottom:96px;}
+  .cap-row{display:grid;grid-template-columns:1fr;gap:8px;padding:26px 0;border-top:1px solid var(--ink-15);position:relative;transition:padding-left .3s var(--out);}
+  @media(min-width:820px){.cap-row{grid-template-columns:minmax(240px,1fr) 2fr;gap:0 40px;align-items:start;padding:34px 0;}}
+  .cap-row .chipset{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+  .cap-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .22s var(--out);}
+  @media (hover:hover) and (pointer:fine){
+    .cap-row:hover{padding-left:14px;}
+    .cap-row:hover::before{transform:scaleY(1);}
+  }
+  .cap-row h3{font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.2vw,26px);letter-spacing:-0.02em;}
+  .cap-row p{font-size:var(--fs-base);color:var(--ink-70);line-height:1.6;max-width:56ch;}
+</style>

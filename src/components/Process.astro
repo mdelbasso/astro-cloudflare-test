@@ -1,0 +1,33 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import DeckNote from './DeckNote.astro';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = ui[lang].steps;
+---
+<!-- PROCESS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>{t.title}</h2>
+      <DeckNote text={t.deck} />
+    </div>
+    <div class="steps stag">
+      {t.items.map((s, i) => (
+        <div class="step"><div class="sn">{`0${i + 1} — `}<Fragment set:html={s.n} /></div><h3>{s.t}</h3><p>{s.d}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ============ PROCESS — secuencia real: acá los números sí van ============ */
+  .steps{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:96px;}
+  @media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr);}}
+  .step{padding:34px 0;border-top:1px solid var(--ink-15);}
+  @media(min-width:820px){.step{padding:0 40px;border-top:none;border-left:1px solid var(--ink-15);}.step:first-child{border-left:none;padding-left:0;}}
+  .step .sn{font-family:var(--mono);font-size:var(--fs-xs);color:var(--accent);letter-spacing:0.06em;margin-bottom:18px;}
+  .step h3{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:-0.02em;margin-bottom:12px;}
+  .step p{font-size:var(--fs-base);color:var(--ink-70);line-height:1.6;}
+</style>

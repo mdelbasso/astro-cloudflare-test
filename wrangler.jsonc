@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "peakcore",
+  "compatibility_date": "2026-11-01",
+  // Sitio estático puro: sin Worker script, solo assets servidos desde dist/
+  "assets": {
+    "directory": "./dist",
+    // Rutas inexistentes → dist/404.html (con status 404)
+    "not_found_handling": "404-page",
+    // Sin redirects de .html automáticos extra: /404 y /en/404 se sirven tal cual
+    "html_handling": "auto-trailing-slash"
+  }
+}
