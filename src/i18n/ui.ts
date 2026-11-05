@@ -36,7 +36,7 @@ export const ui = {
       ],
       kicker:
         '<b>Diagnóstico técnico e implementación para sitios de negocio</b> · Core Web Vitals · SEO técnico · AI Search (GEO) · SEO local',
-      tagline: 'Encuentro el problema. Lo resuelvo directamente. Mido el resultado.',
+      tagline: 'Encuentro el problema. Lo resuelvo directamente. Mido el resultado.(test branch)',
       spec: [
         { k: 'Estado', v: 'Disponible para proyectos seleccionados · Remoto' },
         { k: 'Foco', v: 'Visibilidad · Performance · Conversión' },
