@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Página No Encontrada · PeakCore</title>
+<meta name="description" content="Esta página no existe. La URL puede ser incorrecta, estar desactualizada o la página puede haberse movido.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://peakcore.dev/404">
+<link rel="alternate" hreflang="en" href="https://peakcore.dev/en/404">
+<link rel="alternate" hreflang="es" href="https://peakcore.dev/404">
+<link rel="alternate" hreflang="x-default" href="https://peakcore.dev/404">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+  :root{
+    --bg:#F6F9FA;
+    --bg-2:#F1F4F6;
+    --ink:#1E474F;
+    --slate:#3A393E;
+    --ink-70:rgba(58,57,62,0.72);
+    --ink-lbl:rgba(58,57,62,0.75);
+    --ink-15:rgba(58,57,62,0.16);
+    --ink-08:rgba(58,57,62,0.08);
+    --accent:#E3670A;
+    --accent-deep:#B85708;
+    --good:#1F7A46;
+    --avg:#C9691A;
+    --poor:#C02A18;
+    --disp:'Archivo',sans-serif;
+    --serif:'Newsreader',serif;
+    --mono:'Space Mono',monospace;
+    --out:cubic-bezier(0.23,1,0.32,1);
+    --container:1280px;
+    --fs-2xs:11px;
+    --fs-xs:12px;
+    --fs-sm:15px;
+    --fs-base:16px;
+    --fs-md:clamp(17px,1.6vw,19px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--bg);color:var(--slate);font-family:var(--serif);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,4vw,52px);}
+  ::selection{background:var(--accent);color:var(--bg);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  h1,h2,h3,h4{font-family:var(--disp);font-weight:800;letter-spacing:-0.02em;line-height:1;text-wrap:balance;color:var(--ink);}
+  p{text-wrap:pretty;}
+  .mono{font-family:var(--mono);}
+
+  /* ============ DOC BAR ============ */
+  .docbar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--ink-15);transition:transform .35s var(--out);}
+  .docbar.hide{transform:translateY(-100%);}
+  .docbar-in{display:flex;align-items:center;justify-content:space-between;height:52px;gap:24px;font-family:var(--mono);font-size:var(--fs-xs);}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:800;letter-spacing:-0.01em;font-size:15px;color:var(--ink);}
+  .brand svg{width:22px;height:22px;}
+  .docbar-mid{display:none;color:var(--ink-lbl);letter-spacing:0.04em;}
+  @media(min-width:1040px){.docbar-mid{display:flex;gap:26px;}}
+  .docbar-mid a{transition:color .18s ease;}
+  @media (hover:hover) and (pointer:fine){ .docbar-mid a:hover{color:var(--accent);} }
+  .docbar-right{display:flex;align-items:center;gap:18px;}
+  .lang{display:flex;align-items:center;gap:6px;}
+  .lang a{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-lbl);cursor:pointer;padding:2px;transition:color .18s ease;}
+  .lang a.on{color:var(--accent-deep);font-weight:700;} /* accent (#E3670A) vs bg = 3.2:1, falla WCAG AA en texto chico; accent-deep = 4.5:1 */
+  .lang span{color:var(--ink-15);}
+  .avail{display:none;align-items:center;gap:7px;color:var(--ink-70);letter-spacing:0.04em;}
+  @media(min-width:720px){.avail{display:flex;}}
+  .avail .dot{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,122,70,0.45)}70%{box-shadow:0 0 0 6px rgba(31,122,70,0)}100%{box-shadow:0 0 0 0 rgba(31,122,70,0)}}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .avail .dot{animation:none;}
+  }
+
+  .skip-link{position:absolute;top:-48px;left:12px;z-index:200;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:var(--fs-xs);padding:12px 18px;transition:top .18s var(--out);}
+  .skip-link:focus{top:12px;}
+
+  .hamburger{display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:none;border:1px solid var(--ink-15);cursor:pointer;flex-shrink:0;}
+  @media(min-width:1040px){.hamburger{display:none;}}
+  .hamburger svg{width:16px;height:16px;color:var(--ink);}
+  .hamburger .i-close{display:none;}
+  .hamburger[aria-expanded="true"] .i-open{display:none;}
+  .hamburger[aria-expanded="true"] .i-close{display:block;}
+  .mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;bottom:0;z-index:99;background:var(--bg);overflow-y:auto;}
+  .mobile-menu.open{display:block;}
+  @media(min-width:1040px){.mobile-menu{display:none !important;}}
+  .mobile-menu nav{display:flex;flex-direction:column;padding:8px 0;}
+  .mobile-menu a{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:var(--ink);padding:18px 0;border-bottom:1px solid var(--ink-15);}
+  .mobile-menu .wrap{padding-top:12px;}
+
+  /* ============ 404 MASTHEAD ============ */
+  .hero{padding:clamp(128px,15vw,172px) 0 clamp(96px,12vw,140px);}
+  .kicker{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.04em;color:var(--ink-70);margin-bottom:44px;}
+  .kicker b{color:var(--accent-deep);font-weight:700;} /* mismo fix de contraste que .lang a.on */
+  .headline{font-family:var(--disp);font-weight:900;font-size:clamp(42px,7vw,94px);letter-spacing:-0.03em;line-height:0.94;}
+  .headline .soft{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-0.005em;color:var(--ink-70);font-size:0.6em;line-height:1.15;}
+  .hero-lead{margin-top:32px;max-width:62ch;font-size:clamp(19px,2.1vw,23px);line-height:1.5;color:var(--ink-70);}
+  .hero-actions{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:0.05em;text-transform:uppercase;padding:14px 22px;border:1px solid var(--ink);cursor:pointer;background:transparent;color:var(--ink);transition:background .18s ease,color .18s ease,border-color .18s ease,transform .12s var(--out);}
+  .btn:active{transform:scale(0.98);}
+  .btn svg{width:13px;height:13px;transition:transform .18s var(--out);}
+  .btn--solid{background:var(--ink);color:var(--bg);}
+  @media (hover:hover) and (pointer:fine){
+    .btn--solid:hover{background:var(--accent);border-color:var(--accent);}
+    .btn:hover svg{transform:translate(3px,-3px);}
+  }
+  .hero-rule{margin-top:84px;height:2px;background:var(--ink);}
+
+  /* ============ COLOPHON ============ */
+  .colophon{background:var(--ink);color:rgba(238,243,245,0.68);padding:44px 0 52px;}
+  .colophon > .wrap{border-top:1px solid rgba(238,243,245,0.16);padding-top:36px;}
+  .colophon-grid{display:grid;grid-template-columns:1fr;gap:28px;font-family:var(--mono);font-size:var(--fs-2xs);letter-spacing:0.03em;line-height:1.8;}
+  @media(min-width:820px){.colophon-grid{grid-template-columns:1fr 1fr 1fr;gap:40px;}}
+  .colophon .ct{color:var(--bg);font-weight:700;text-transform:uppercase;font-size:var(--fs-2xs);letter-spacing:0.1em;margin-bottom:8px;}
+  .colophon .live{color:#EEA46C;font-weight:700;}
+  .colophon-base{margin-top:36px;padding-top:20px;border-top:1px solid rgba(238,243,245,0.12);display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:var(--fs-2xs);}
+  @media(min-width:720px){.colophon-base{flex-direction:row;justify-content:space-between;}}
+  .colophon a.top{display:inline-flex;align-items:center;gap:7px;color:var(--bg);}
+  .colophon a.top svg{width:12px;height:12px;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Saltar al contenido</a>
+
+<div class="docbar" id="docbar">
+  <div class="wrap docbar-in">
+    <a href="/" class="brand">
+      <svg aria-hidden="true" viewBox="0 0 26 26" fill="none"><path d="M3 20L10 6L13.5 13L17 6L23 20" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="10" cy="6" r="1.5" fill="var(--accent)"></circle></svg>
+      PeakCore
+    </a>
+    <nav class="docbar-mid">
+      <a href="/#capabilities">Servicios</a>
+      <a href="/#results">Resultados</a>
+      <a href="/#work">Trabajo</a>
+      <a href="/#stack">Stack</a>
+      <a href="https://www.linkedin.com/in/mdelbasso/" target="_blank" rel="noopener">Contacto</a>
+    </nav>
+    <div class="docbar-right">
+      <div class="avail"><span class="dot"></span><span>Disponible</span></div>
+      <div class="lang" role="group" aria-label="Language / Idioma">
+        <a href="/en/" data-lang="en">EN</a><span>/</span><a href="/" data-lang="es" class="on" aria-current="page">ES</a>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menú">
+        <svg aria-hidden="true" class="i-open" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+        <svg aria-hidden="true" class="i-close" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="wrap">
+    <nav>
+      <a href="/#capabilities">Servicios</a>
+      <a href="/#results">Resultados</a>
+      <a href="/#work">Trabajo</a>
+      <a href="/#stack">Stack</a>
+      <a href="https://www.linkedin.com/in/mdelbasso/" target="_blank" rel="noopener">Contacto</a>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker"><b>404</b></p>
+    <h1 class="headline">Esta página<br><span class="soft">no existe.</span></h1>
+    <p class="hero-lead">La URL puede ser incorrecta, estar desactualizada o la página puede haberse movido.</p>
+    <div class="hero-actions">
+      <a href="/" class="btn btn--solid"><span>Volver a PeakCore</span> <svg aria-hidden="true" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+    </div>
+    <div class="hero-rule"></div>
+  </div>
+</header>
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <div class="colophon-grid">
+      <div>
+        <p class="ct">Colofón</p>
+        <p>Hecho a mano — HTML/CSS/JS, un solo archivo, sin frameworks. Tipografía: Archivo, Newsreader y Space Mono.</p>
+      </div>
+      <div>
+        <p class="ct">Privacidad</p>
+        <p>Sin cookies, sin trackers de terceros, sin banners de consentimiento — porque no hay nada que consentir.</p>
+      </div>
+      <div>
+        <p class="ct">Esta página, ahora mismo</p>
+        <p id="liveWeight"><span>Midiendo…</span></p>
+      </div>
+    </div>
+    <div class="colophon-base">
+      <div>© 2026 PEAKCORE · SEO Técnico · Optimización Web · Core Web Vitals · AI Search (GEO)</div>
+      <a href="/" class="top"><span>Volver a PeakCore</span> <svg aria-hidden="true" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- live page-weight readout (Resource Timing) ----
+  window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+      try{
+        const nav = performance.getEntriesByType('navigation')[0];
+        const res = performance.getEntriesByType('resource');
+        let bytes = (nav && nav.transferSize) || 0;
+        res.forEach(r=>{ bytes += r.transferSize || r.decodedBodySize || 0; });
+        const reqs = 1 + res.length;
+        const ms = nav ? Math.max(0, Math.round(nav.loadEventEnd - nav.startTime)) : 0;
+        const el = document.getElementById('liveWeight');
+        if(bytes > 0 && ms > 0 && el){
+          const kb = Math.max(1, Math.round(bytes/1024));
+          el.innerHTML = `<span class="live">${kb} KB</span> transferidos · <span class="live">${reqs}</span> requests · cargada en <span class="live">${ms} ms</span>`;
+        }
+      }catch(e){ /* API no disponible — queda "Midiendo…" */ }
+    }, 150);
+  });
+
+  // ---- mobile menu (hamburger) ----
+  const hbBtn = document.getElementById('hamburgerBtn');
+  const mMenu = document.getElementById('mobileMenu');
+  function closeMenu(){ mMenu.classList.remove('open'); hbBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  function openMenu(){ mMenu.classList.add('open'); hbBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  hbBtn.addEventListener('click', ()=>{ mMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+  mMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+  window.addEventListener('resize', ()=>{ if(window.innerWidth>=1040) closeMenu(); });
+
+  // ---- docbar hide on scroll down ----
+  const docbar = document.getElementById('docbar');
+  let lastY = 0;
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    docbar.classList.toggle('hide', y>lastY && y>200);
+    lastY = y;
+  }, {passive:true});
+</script>
+</body></html>
