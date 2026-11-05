@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "peakcore",
   "compatibility_date": "2026-11-01",
-  “previews”: {},
+  "previews": {},
   // Sitio estático puro: sin Worker script, solo assets servidos desde dist/
   "assets": {
     "directory": "./dist",
